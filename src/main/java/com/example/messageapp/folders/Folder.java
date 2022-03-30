@@ -17,7 +17,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 public class Folder {
 
     @PrimaryKeyColumn(name = "user_id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
-    private String userId;
+    private String id;
 
     @PrimaryKeyColumn(name = "label", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
     private String label;
