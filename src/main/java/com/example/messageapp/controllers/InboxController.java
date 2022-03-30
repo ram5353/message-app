@@ -1,6 +1,8 @@
 package com.example.messageapp.controllers;
 
 
+import com.example.messageapp.emailslist.EmailsList;
+import com.example.messageapp.emailslist.EmailsListRepository;
 import com.example.messageapp.folders.Folder;
 import com.example.messageapp.folders.FolderRepository;
 import com.example.messageapp.folders.FolderService;
@@ -23,18 +25,26 @@ public class InboxController {
     @Autowired
     private FolderService folderService;
 
+    @Autowired
+    private EmailsListRepository emailsListRepository;
+
     @GetMapping("/")
     public String homePage(@AuthenticationPrincipal OAuth2User principal, Model model) {
         if (principal == null || !StringUtils.hasText(principal.getAttribute("login"))) {
             return "index";
         }
 
+        // Fetch folders
         String userId = principal.getAttribute("login");
         List<Folder> userFolders = folderRepository.findAllById(userId);
         model.addAttribute("userFolders", userFolders);
         List<Folder> defaultFolders = folderService.fetchDefaultFolders(userId);
         model.addAttribute("defaultFolders", defaultFolders);
 
+        // Fetch Messages
+        String folderLabel = "Inbox";
+        List<EmailsList> emailsList = emailsListRepository.findAllByKey_UserIdAndKey_Label(userId, folderLabel);
+        model.addAttribute("emailsList", emailsList);
         return "inbox-page";
     }
 }
