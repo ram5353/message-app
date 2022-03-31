@@ -69,12 +69,13 @@
 
         <main>
             <div class="card" th:if="${emailsList}">
-                <div class="card-header">
+                <div class="card-header" th:text="${folder}">
                     Inbox
                 </div>
                 <div class="card-body">
                     <div class="list-group">
-                        <a th:each="message: ${emailsList}" href="#" class="list-group-item list-group-item-action">
+                        <a th:each="message: ${emailsList}" th:href="@{'/emails/' + ${message.key.timeId}}"
+                           class="list-group-item list-group-item-action">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1" th:text="${message.subject}">List group item heading</h5>
                                 <small th:text="${message.agoTimeString}">3 days ago</small>

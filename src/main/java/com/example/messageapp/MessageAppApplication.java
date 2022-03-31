@@ -54,7 +54,7 @@ public class MessageAppApplication {
 
 			EmailsList item = new EmailsList();
 			item.setKey(key);
-			item.setTo(Arrays.asList("ram5353"));
+			item.setTo(Arrays.asList("ram5353", "sindhu5353", "sia5353"));
 			item.setSubject("Subject " + i);
 			item.setUnread(true);
 			emailsListRepository.save(item);
