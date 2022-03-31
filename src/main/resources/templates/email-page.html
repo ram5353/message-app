@@ -57,39 +57,37 @@
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1 th:text="${name}">Welcome, name</h1>
-        </header>
+<div class="container">
+    <header>
+        <h1>Welcome, Name</h1>
+    </header>
 
-        <nav>
-            <div th:insert="components/folder-list :: folder-list (panelName = 'Default Folders', folders = ${defaultFolders})"></div>
-            <div th:insert="components/folder-list :: folder-list (panelName = 'User Folders', folders = ${userFolders})"></div>
-        </nav>
+    <nav>
+        <div th:insert="components/folder-list :: folder-list (panelName = 'Default Folders', folders = ${defaultFolders})"></div>
+        <div th:insert="components/folder-list :: folder-list (panelName = 'User Folders', folders = ${userFolders})"></div>
+    </nav>
 
-        <main>
-            <div class="card" th:if="${emailsList}">
-                <div class="card-header">
-                    Inbox
-                </div>
-                <div class="card-body">
-                    <div class="list-group">
-                        <a th:each="message: ${emailsList}" href="#" class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1" th:text="${message.subject}">List group item heading</h5>
-                                <small th:text="${message.agoTimeString}">3 days ago</small>
-                            </div>
-                            <p class="mb-1" th:text="${message.to}">Some placeholder content in a paragraph.</p>
-                        </a>
-                    </div>
-                </div>
+    <main>
+        <div class="card">
+            <div class="card-header">View Email</div>
+            <div class="card-body">
+                <dt>From</dt>
+                <dd th:text="${email.from}"></dd>
+                <dt>To</dt>
+                <dd th:text="${toIds}"></dd>
+                <dt>Subject</dt>
+                <dd th:text="${email.subject}"></dd>
+                <dt>Body</dt>
+                <dd th:text="${email.body}"></dd>
             </div>
-        </main>
 
-        <footer>
-            <!-- Footer content -->
-        </footer>
-    </div>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Footer content -->
+    </footer>
+</div>
 
 </body>
 </html>

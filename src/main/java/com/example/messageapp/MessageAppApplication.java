@@ -1,6 +1,8 @@
 package com.example.messageapp;
 
 import com.datastax.oss.driver.api.core.uuid.Uuids;
+import com.example.messageapp.email.Email;
+import com.example.messageapp.email.EmailRepository;
 import com.example.messageapp.emailslist.EmailsList;
 import com.example.messageapp.emailslist.EmailsListPrimaryKey;
 import com.example.messageapp.emailslist.EmailsListRepository;
@@ -24,6 +26,9 @@ public class MessageAppApplication {
 
 	@Autowired
 	private EmailsListRepository emailsListRepository;
+
+	@Autowired
+	private EmailRepository emailRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MessageAppApplication.class, args);
@@ -53,6 +58,14 @@ public class MessageAppApplication {
 			item.setSubject("Subject " + i);
 			item.setUnread(true);
 			emailsListRepository.save(item);
+
+			Email email = new Email();
+			email.setId(key.getTimeId());
+			email.setFrom("ram5353");
+			email.setSubject(item.getSubject());
+			email.setBody("Body " + i);
+			email.setTo(item.getTo());
+			emailRepository.save(email);
 		}
 	}
 
