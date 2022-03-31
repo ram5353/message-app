@@ -2,6 +2,7 @@ package com.example.messageapp.emailslist;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
@@ -23,5 +24,8 @@ public class EmailsList {
 
     @CassandraType(type = CassandraType.Name.BOOLEAN)
     private boolean isUnread;
+
+    @Transient
+    private String agoTimeString;
 
 }
